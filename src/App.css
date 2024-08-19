@@ -1,0 +1,198 @@
+#root {
+  max-width: 100%;
+  margin: 0px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  color: wheat;
+  text-shadow: 1px .5px 1px white;
+  
+  
+  ;
+}
+html{
+  background: black;
+  background-size: cover;
+  background-image: url('./assets/4990245-hd_1920_1080_30fps.mp4');
+}
+
+body{
+/* background-image: url(./assets/pexels-francesco-ungaro-998641.jpg); */
+background: transparent;
+background-size: cover;
+
+}
+
+
+div#root{
+background: black;
+
+}
+
+.navbar-home{
+  color: #2f4f4f
+}
+a.navbar-brand{
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px wheat;
+
+}
+a.navbar-brand:hover{
+  color: wheat;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px white;
+}
+a.nav-link{
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 2px wheat;
+}
+a.nav-link:hover{
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 2px wheat;
+}
+
+.btn{
+  text-shadow: 2px 2px 2px wheat;
+  margin: 3px;
+  color: white;
+
+}
+
+
+div.offcanvas-body{
+  background: black;
+  color: white
+}
+
+div.offcanvas-header{
+  background: black;
+  color: white;
+}
+div.card-body{
+  background: gray;
+  color: white
+}
+
+img.card-img-top{
+  width: 100%;
+  height: auto;
+}
+/* .container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  color: white
+} */
+
+div.list-group-item{
+  background: gray;
+  color: white;
+}
+
+/* div.card-body{
+  height: auto;
+} */
+
+.card{
+  /* width: 100%; */
+  /* height: auto; */
+  margin: 15px;
+  /* background: gray; */
+  /* color: white; */
+  /* padding: 5px; */
+
+}
+.home-container{
+  color: white;
+  text-shadow: 2px 2px 2px wheat;
+  position: sticky;
+  width: auto;
+  padding: 4rem;
+  margin: 4rem;
+  /* border: 2px solid white; */
+  /* box-shadow: 0 0 15px; */
+  border-radius: 10px;
+}
+
+.link-container{
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+  text-align: center;
+  text-decoration: none;
+  background-color: transparent;
+}
+.link-container a{
+  color:white;
+  text-decoration: none;
+}
+
+.footer-container{
+  display: flex;
+  text-decoration: none;
+  color: white;
+  flex-direction: column;
+  position: relative;
+  margin: 4rem;
+  margin-top: 30rem;
+
+}
+.footer-container a{
+  color:white;
+  text-decoration: none;
+  margin: 2rem;
+}
+
+#btn-btn{
+  background-color: red;
+}
+
+.cart-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.cart-container img{
+  width: 200px;
+  
+}
+
+button.navbar-toggler.collapsed{
+  color: white;
+  /* background: white; */
+}
+span.navbar-toggler-icon{
+  color: white;
+   
+  
+}
+
+.home-container{
+  display: flex;
+  justify-content: center;
+}
+.home-container img{
+  margin-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px, 0 0 30px;
+  
+}
+
+/* .products{
+  
+  
+  height: 50px;
+} */
+
+
