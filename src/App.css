@@ -1,32 +1,30 @@
-#root {
-  max-width: 100%;
-  margin: 0px;
-  padding: 10px;
-  box-sizing: border-box;
+div#root {
+  max-width: 100vh;
   text-align: center;
   color: wheat;
+  padding: 10px;
   text-shadow: 1px .5px 1px white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-repeat: no-repeat; */
+  /* background-image: url('./assets/pexels-ryan-holloway-71499-427900.jpg'); */
+  /* background-size: cover; */
+  /* background-position: center; */
+  /* background-color: transparent; */
   
-  
-  ;
 }
-html{
-  background: black;
+
+
+html, body{
+  background-image: url('./assets/pexels-ryan-holloway-71499-427900.jpg');
   background-size: cover;
-  background-image: url('./assets/4990245-hd_1920_1080_30fps.mp4');
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
-
-body{
-/* background-image: url(./assets/pexels-francesco-ungaro-998641.jpg); */
-background: transparent;
-background-size: cover;
-
-}
-
-
-div#root{
-background: black;
-
+.App{
+  background-image: url('./assets//pexels-ryan-holloway-71499-427900.jpg');
 }
 
 .navbar-home{
@@ -67,7 +65,8 @@ a.nav-link:hover{
 
 
 div.offcanvas-body{
-  background: black;
+  background-image: url('./assets/pexels-ryan-holloway-71499-427900.jpg');
+  background-size: cover;
   color: white
 }
 
@@ -84,32 +83,18 @@ img.card-img-top{
   width: 100%;
   height: auto;
 }
-/* .container{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
-  padding: 20px;
-  color: white
-} */
+
 
 div.list-group-item{
   background: gray;
   color: white;
 }
 
-/* div.card-body{
-  height: auto;
-} */
+
 
 .card{
-  /* width: 100%; */
-  /* height: auto; */
+
   margin: 15px;
-  /* background: gray; */
-  /* color: white; */
-  /* padding: 5px; */
 
 }
 .home-container{
@@ -119,8 +104,6 @@ div.list-group-item{
   width: auto;
   padding: 4rem;
   margin: 4rem;
-  /* border: 2px solid white; */
-  /* box-shadow: 0 0 15px; */
   border-radius: 10px;
 }
 
@@ -185,14 +168,12 @@ span.navbar-toggler-icon{
 .home-container img{
   margin-bottom: 30px;
   border-radius: 20px;
-  box-shadow: 0 0 15px, 0 0 30px;
+  box-shadow: 0 0 15px, 0 0 35px wheat;
   
 }
 
-/* .products{
-  
-  
-  height: 50px;
-} */
 
-
+.login-btn, .register-btn{
+  position: relative;
+  margin-left: 10rem;
+}

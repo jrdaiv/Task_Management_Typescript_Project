@@ -4,7 +4,8 @@ import { QueryKey, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { Card, Container, ListGroup } from 'react-bootstrap';
 import { addToCart, calculateTotals } from '../features/cartListSlice'
-import '../App.css'
+// import '../App.css'
+import '../styles/Components.css'
 import NavBar from './NavBar';
 import NavBarHome from './NavBarHome';
 

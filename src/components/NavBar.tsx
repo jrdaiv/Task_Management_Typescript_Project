@@ -102,7 +102,7 @@ const NavBar: React.FC = () => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Form>
-                        <Button variant="primary" onClick={() => loginWithRedirect()} type="submit">
+                        <Button className='login-btn' variant="primary" onClick={() => loginWithRedirect()} type="submit">
                             Login
                         </Button>
                     </Form>
@@ -116,7 +116,7 @@ const NavBar: React.FC = () => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Form>
-                        <Button variant="primary" type="submit" onClick={() => loginWithRedirect()}>
+                        <Button className='register-btn' variant="primary" type="submit" onClick={() => loginWithRedirect()}>
                             Register
                         </Button>
 
