@@ -42,13 +42,12 @@ export const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <UserContext.Provider value={{ user, setUser}}>
-              {/* <NavBar /> */}
           <Router>
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/products' element={<Products />} />
               <Route path='/cart' element={<ShoppingCart />} />
-              <Route path='/settings' element={<Settings />} />
+              <Route path='/settings' element={<AuthenticationGaurd component={Settings}/>} />
               <Route path='/profile' element={<AuthenticationGaurd component={ProfilePage}/> } />
             </Routes>
           </Router>

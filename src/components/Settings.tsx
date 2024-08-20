@@ -1,6 +1,6 @@
 import axios  from "axios";
 import React, { useState, useContext, FormEvent } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 // import UserContext from "../context/UserContext";
 import '../App.css'
 import NavBarHome from "./NavBarHome";
@@ -27,12 +27,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Settings: React.FC = () => {
   // const { user } = useContext(UserContext);
-  const { user } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [userName, setUserName] = useState<string>(user?.userName || "");
   const [email, setEmail] = useState<string>(user?.email || "");
   const [password, setPassword] = useState<string>('');
 
-
+    if(isLoading) {
+      return <Spinner animation="border" variant="primary" />
+  }
 
 
   const deleteUser = async (event: FormEvent) => {
@@ -57,7 +59,8 @@ const Settings: React.FC = () => {
 
   const handleUpdate = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(user);
+    if (isAuthenticated) {
+      console.log(user);
     console.log(userName, email, password);
     if (!userName || !email || !password) {
       alert("Please fill in all fields");
@@ -80,6 +83,9 @@ const Settings: React.FC = () => {
       console.error(error);
       alert("Profile Update Failed");
     }
+    }else{
+      console.log(isAuthenticated)
+    }
 
   };
 
@@ -90,6 +96,7 @@ const Settings: React.FC = () => {
       <NavBarHome />
       <h2 className="mt-5 text-white">Settings</h2>
       <h5>Update Profile</h5>
+      {isAuthenticated && <div>hi</div>}
       <Form onSubmit={handleUpdate}>
         <Form.Group as={Row} className="mb-3"  controlId="formPlaintextUserName" >
           <Form.Label column sm="2">
