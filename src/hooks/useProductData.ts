@@ -14,7 +14,8 @@ export const useProductData = () => {
                 
                 setProducts(response.data)
             }catch (error){
-                setError(error.message)
+                setError(error)
+                console.log(error)
             }
         }
         

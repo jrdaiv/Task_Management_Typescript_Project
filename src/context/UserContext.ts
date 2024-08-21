@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 
-interface User{
+export interface User {
     id: string,
     userName: string,
     email: string,
@@ -10,39 +10,17 @@ interface User{
     token?: string,
 
 }
-interface UserContextType{
+export interface UserContextType{
     user: User | null,
-    setUser: React.Dispatch<React.SetStateAction<User> | null>
+    setUser: React.Dispatch<React.SetStateAction<User | null>>
 
 }
 
 
 const UserContext = createContext<UserContextType>( {
     user: null,
-    setUser: () => { }
+    setUser: () => {}
 });
-
-
-export const UserProvider = () => {
-    const [user, setUser] = useState(() => {
-        const savedUser = localStorage.getItem('user');
-        return savedUser ? JSON.parse(savedUser) : { userName: '', email: '', password: '', cart: [], isLoggedIn: false, token: ''};
-    })
-
-    useEffect(() => {
-        if(user.isLoggedIn){
-            localStorage.setItem('user', JSON.stringify(user));
-        }else{
-            localStorage.removeItem('user');
-        }
-    }, [user])
-    return {user, setUser}
-
-    
-}
-
-
-
 
 
 

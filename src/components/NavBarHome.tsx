@@ -5,7 +5,7 @@ import { Badge, Button, Nav, Navbar, NavbarBrand, NavDropdown } from 'react-boot
 
 
 const NavBarHome = () => {
-    const { user, logout } = useAuth0();
+    const { user, logout, isAuthenticated } = useAuth0();
 
 
 
@@ -20,6 +20,7 @@ const NavBarHome = () => {
                 
                         <Nav.Link href="/products">Products</Nav.Link>
                         <NavDropdown title="Account" id="basic-nav-dropdown">
+                            <NavDropdown.Header>{isAuthenticated && <div>Hello {user?.name}</div>}</NavDropdown.Header>
                             <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                             <NavDropdown.Item onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                                 Logout
