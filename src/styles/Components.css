@@ -1,4 +1,9 @@
-
+div#root{
+    background-image: url('../assets/pexels-ryan-holloway-71499-427900.jpg');
+    background-size: 100vh;
+    background-position: center;
+    
+}
 
 
 

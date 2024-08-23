@@ -11,7 +11,7 @@ import Settings from './components/Settings';
 import { Home } from './components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Footer } from './components/Footer';
-import './App.css'
+// import './App.css'
 import AuthenticationGaurd from './components/AuthenticationGaurd';
 import { ProfilePage } from './components/ProfilePage';
 import { useAuth0 } from '@auth0/auth0-react';

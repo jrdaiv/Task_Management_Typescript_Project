@@ -11,7 +11,7 @@ interface User {
     id: string,
     name: string,
     email: string,
-    // password: string,
+    password: string,
     userName: string,
     // token: string,
     cart?: any[],
@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
                 userName: auth0User.name || '',
                 name: auth0User.nickname || '',
                 email: auth0User.email || '',
-                // password: '',
+                password: '',
                 // token: auth0User.accessToken!,
                 isLoggedIn: true,
             };
@@ -59,6 +59,9 @@ const NavBar: React.FC = () => {
             setUser(null);
         }
     }, [isAuthenticated, auth0User, setUser]);
+
+
+    
 
 
 
@@ -82,7 +85,7 @@ const NavBar: React.FC = () => {
                                     </NavDropdown.Item>
                                 </NavDropdown>
                                 <Nav.Link href="/cart">
-                                    Cart <Badge>{user?.cart?.length || 0}</Badge>
+                                    Cart 
                                 </Nav.Link>
                             </>
                         ) : (

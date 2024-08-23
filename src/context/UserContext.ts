@@ -2,14 +2,20 @@ import { createContext } from "react";
 
 export interface User {
     id: string,
-    userName: string,
+    username: string,
     email: string,
-    password?: string,
-    cart?: any[],
+    password: string,
+    name: {
+        firstname: string,
+        lastname: string,
+    },
+    cart?: [],
     isLoggedIn: boolean,
     token?: string,
 
 }
+
+
 export interface UserContextType{
     user: User | null,
     setUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -19,7 +25,9 @@ export interface UserContextType{
 
 const UserContext = createContext<UserContextType>( {
     user: null,
-    setUser: () => {}
+    setUser: () => {
+        throw new Error("Function not implemented.");
+    }
 });
 
 

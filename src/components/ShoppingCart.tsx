@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, clearCart, calculateTotals } from '../features/cartListSlice';
 import '../App.css'
 import NavBarHome from './NavBarHome';
+import { useNavigate } from 'react-router-dom';
 
 interface CartItem {
   id: number,
@@ -24,6 +25,7 @@ interface State {
   const totalAmount = useSelector((state: State) => state.cart.totalAmount);
   
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
  
   useEffect(() => {
@@ -47,7 +49,7 @@ interface State {
       <h3 className='mt-5 mb-3 text-white'>Total: ${totalAmount.toFixed(2)}</h3>
       <button className='btn btn-primary' onClick={() => {
         dispatch(clearCart());
-        
+        navigate('/products')
       }}>
         Checkout
       </button>

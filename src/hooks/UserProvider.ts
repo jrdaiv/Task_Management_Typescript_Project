@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import {UserContextType, User} from "../context/UserContext";
+import { useState, useEffect, useContext } from "react";
+import UserContext, {UserContextType, User} from "../context/UserContext";
 
 export const useUserProvider = (): UserContextType => {
     const [user, setUser] = useState<User | null>(() => {
@@ -11,9 +11,9 @@ export const useUserProvider = (): UserContextType => {
 
     useEffect(() => {
         if (user && user.isLoggedIn) {
-            sessionStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(user));
         }else {
-            sessionStorage.removeItem("user");
+            localStorage.removeItem("user");
         }
     }, [user])
     return {
@@ -24,3 +24,4 @@ export const useUserProvider = (): UserContextType => {
 
 
 }
+export const useUser = () => useContext(UserContext)

@@ -1,84 +1,101 @@
-import React, { useState, useContext, FormEvent } from "react";
+import React, { useState, useContext, FormEvent, useEffect } from "react";
 import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 import axios from "axios";
 import NavBarHome from "./NavBarHome";
 import { useAuth0 } from "@auth0/auth0-react";
-import UserContext from "../context/UserContext";
+import UserContext, { User } from "../context/UserContext";
+import { fetchAllUsers, fetchUser } from "../hooks/UserData";
 import { useNavigate } from "react-router-dom";
 
 
-interface User {
-  id?: string;
-  username: string;
-  email: string;
-  password: string;
-  isLoggedIn: boolean;
-
-}
 
 const Settings: React.FC = () => {
-  const { user: authUser, isAuthenticated, isLoading, logout } = useAuth0();
+  const { isAuthenticated, user: auth0User, isLoading: authLoading, logout } = useAuth0();
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const [userName, setUserName] = useState<string>(authUser?.name || "");
-  const [email, setEmail] = useState<string>(authUser?.email || "");
-  const [password, setPassword] = useState<string>("");
-  
-  // loading settings page 
-  if (isLoading) {
-    return <Spinner animation="border" variant="primary" />;
-  }
+  const [users, setUsers] = useState<User[]>([]);
+  const [userName, setUserName] = useState<string>('');
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [userPassword, setUserPassword] = useState<string>('');
 
   
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-
-  function handleUpdate(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
-    if (!userName || !email || !password) {
-      alert("Please fill in all fields");
-      return;
+  useEffect(() => {
+    if (user) {
+      setUserEmail(user.email || '');
+      setUserName(user.username || '');
+      setUserPassword(user.password || '');
     }
+    
+  }, [user])
 
-    const updatedUser: User = {
-      // id: user?.id,
-      username: userName,
-      email: email,
-      password: password,
-      isLoggedIn: true,
-    };
-
-    sessionStorage.setItem("user", JSON.stringify(updatedUser));
-    // localStorage.setItem("user", JSON.stringify(updatedUser));
-    console.log(user, updatedUser);
-    console.log("Updated user", user);
-    setUser(updatedUser);
-    alert("Profile Updated");
-
+  const handleUserUpdate = async (event: FormEvent) => {
+    event.preventDefault();
+    if (user) {
+      setLoading(true)
+      try {
+        const updatedUser = {...user, username: userName, email: userEmail, password: userPassword };
+        console.log("Updating user:", user);
+        const response = await axios.put(`https://fakestoreapi.com/users/1`, updatedUser);
+        setUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+        console.log("User updated successfully:", response.data);
+        alert("User Updated Successfully");
+      } catch (error) {
+        alert("Failed to Update User");
+      }finally {
+        setLoading(false)
+        
+      }
+    }
   };
 
+  const handleDelete = async () => {
+    if (user) {
+      try {
+        console.log("Deleting user with ID:", user.id);
+        await axios.delete(`https://fakestoreapi.com/users/1`);
+        console.log("User deleted successfully");
+        alert("User Deleted Successfully");
+        sessionStorage.removeItem("user");
+        localStorage.removeItem("user");
+        setUser(null);
+        logout({ logoutParams: { returnTo: window.location.origin } })
+      } catch (error) {
+        alert("Failed to Delete User");
+      }
+    }
+  };
 
-const handleDelete = (event: FormEvent<HTMLFormElement>) => {
+  const handleUserDelete = (event: FormEvent) => {
     event.preventDefault();
+    const userConfirmation = window.confirm("Are you sure you want to delete your account?");
+    if (userConfirmation) {
+      handleDelete();
 
-    if (window.confirm("Are you sure you want to delete your account?")) {
-      // localStorage.removeItem("user");
-      sessionStorage.removeItem("user");
-      setUser(null);
-      alert("Account deleted");
-      logout({ logoutParams: { returnTo: window.location.origin } })
+    } 
+  };
+
+  if (loading || authLoading) {
+    return <Spinner animation="border" variant="primary" />;
   }
-
+  if (error) {
+    return <div>Error: {error}</div>;
   }
-
+  if (!user) {
+    return <div>User not found</div>;
+  }
 
   return (
     <div>
       <NavBarHome />
       <h2 className="mt-5 text-white">Settings</h2>
       <h5>Update Profile</h5>
-      {isAuthenticated && <div>hi</div>}
-      <Form onSubmit={handleUpdate}>
+      <Form onSubmit={handleUserUpdate}>
         <Form.Group as={Row} className="mb-3" controlId="formPlaintextUserName">
           <Form.Label column sm="2">
             Username
@@ -86,7 +103,6 @@ const handleDelete = (event: FormEvent<HTMLFormElement>) => {
           <Col sm="10">
             <Form.Control
               type="text"
-              placeholder="Enter Username"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -98,10 +114,9 @@ const handleDelete = (event: FormEvent<HTMLFormElement>) => {
           </Form.Label>
           <Col sm="10">
             <Form.Control
-              type="email"
-              placeholder="email@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
             />
           </Col>
         </Form.Group>
@@ -112,9 +127,8 @@ const handleDelete = (event: FormEvent<HTMLFormElement>) => {
           <Col sm="10">
             <Form.Control
               type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
             />
           </Col>
         </Form.Group>
@@ -123,14 +137,11 @@ const handleDelete = (event: FormEvent<HTMLFormElement>) => {
         </Button>
       </Form>
       <h5 className="mt-5">Delete User Account</h5>
-      <Form onSubmit={handleDelete}>
-        <Button variant="danger" type="submit">
-          Delete
-        </Button>
-      </Form>
+      <Button variant="danger" onClick={handleUserDelete}>
+        Delete
+      </Button>
     </div>
   );
 };
 
-export default Settings;
-
+export default React.memo(Settings);

@@ -13,7 +13,7 @@ const NavBarHome = () => {
 
 
     <Navbar className='navbar-home' bg='transparent' expand="sm">
-        <Navbar.Brand href="/profile">E-Commerce</Navbar.Brand>
+        <Navbar.Brand href="/">E-Commerce</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className="ms-auto">
@@ -27,7 +27,7 @@ const NavBarHome = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="/cart">
-                            Cart <Badge>{user?.cart?.length | 0}</Badge>
+                            Cart 
                         </Nav.Link>                  
             </Nav>
 

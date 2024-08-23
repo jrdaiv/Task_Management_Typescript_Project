@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const useProductData = () => {
     const [products, setProducts] = useState([]);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<null>(null);
 
     useEffect(() => {
         const fetchProducts = async () => {

@@ -4,6 +4,7 @@ import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 interface AuthenticationGaurdProps {
   component: ComponentType<object>;
+  
 }
 
 
