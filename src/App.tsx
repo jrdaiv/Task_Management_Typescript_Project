@@ -31,8 +31,13 @@ export const App: React.FC = () => {
     if (authUser) {
       const newUser = {
         id: authUser.sub || '',
-        userName: authUser.name ?? '',
+        username: authUser.name ?? '',
         email: authUser.email ?? '',
+        password: '',
+        name: {
+          firstname: authUser.given_name ?? '',
+          lastname: authUser.family_name ?? '',
+        },
         isLoggedIn: true,
         cart: user?.cart || [],
       }

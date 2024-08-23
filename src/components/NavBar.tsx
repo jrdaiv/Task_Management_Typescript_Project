@@ -2,21 +2,21 @@ import { useEffect } from 'react';
 import React, { useContext, useState, FormEvent } from 'react';
 import { Navbar, Nav, Button, Offcanvas, Form, NavDropdown, Badge } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
-import UserContext from '../context/UserContext';
+import UserContext, { User } from '../context/UserContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import '../App.css'
 
-interface User {
-    id: string,
-    name: string,
-    email: string,
-    password: string,
-    userName: string,
-    // token: string,
-    cart?: any[],
-    isLoggedIn: boolean,
-}
+// interface User {
+//     id: string,
+//     name: string,
+//     email: string,
+//     password: string,
+//     userName: string,
+//     // token: string,
+//     cart?: any[],
+//     isLoggedIn: boolean,
+// }
 
 const NavBar: React.FC = () => {
     const { user, setUser } = useContext(UserContext);
@@ -45,11 +45,14 @@ const NavBar: React.FC = () => {
         if (isAuthenticated && auth0User) {
             const userData: User = {
                 id: auth0User.sub || '',
-                userName: auth0User.name || '',
-                name: auth0User.nickname || '',
-                email: auth0User.email || '',
+                username: auth0User.name || '',
                 password: '',
-                // token: auth0User.accessToken!,
+                name: {
+                    firstname: auth0User.given_name || '',
+                    lastname: auth0User.family_name || '',
+                },
+                email: auth0User.email || '',
+                cart: [],
                 isLoggedIn: true,
             };
             setUser(userData);
