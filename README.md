@@ -1,8 +1,9 @@
 E-Commerce Application
 This is a React-based e-commerce application that allows users to browse products, add them to a shopping cart, update their profile, and manage their account. The application uses various libraries and tools like Redux Toolkit, React Query, Axios, and Auth0 for authentication.
 
+( both deployed but still doesnt work )
 vercel deployment: https://task-management-typescript-project-git-29dadb-jrdaivs-projects.vercel.app/
-render deplowment: (didnt work) https://task-management-typescript-project.onrender.com
+render deployment: https://task-management-typescript-project.onrender.com
 
 
 Table of Contents
