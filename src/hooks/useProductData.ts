@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const useProductData = () => {
     const [products, setProducts] = useState([]);
-    const [error, setError] = useState<null>(null);
+    const [error, setError] = useState<Error | null >(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -14,7 +14,7 @@ export const useProductData = () => {
                 
                 setProducts(response.data)
             }catch (error){
-                setError(error)
+                setError(new Error)
                 console.log(error)
             }
         }
