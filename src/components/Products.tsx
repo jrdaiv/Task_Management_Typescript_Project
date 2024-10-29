@@ -43,10 +43,10 @@ const Products: React.FC = () => {
     <>
       {/* <NavBar /> */}
       <NavBar />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 text-black" >
+      <div className="flex flex-wrap gap-4 p-10 ml-16 text-black" >
         {products.map((product, index) => (
           <div key={index}>
-            <Card placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <Card className='w-[300px]' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <CardBody className='w-[300px] h-[420px]' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                 <img src={product.image} alt={product.title} className="w-[250px] h-64" />
                 <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
