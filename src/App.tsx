@@ -14,6 +14,7 @@ import AuthenticationGaurd from './components/AuthenticationGaurd';
 import { ProfilePage } from './components/ProfilePage';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useUserProvider } from './hooks/UserProvider';
+import Callback from './components/Callback';
 
 
 
@@ -59,6 +60,7 @@ export const App: React.FC = () => {
                 <Route path='/cart' element={<AuthenticationGaurd component={ShoppingCart} />} />
                 <Route path='/settings' element={<AuthenticationGaurd component={Settings} />} />
                 <Route path='/profile' element={<AuthenticationGaurd component={ProfilePage} />} />
+                <Route path="/callback" element={<Callback />} />
               </Routes>
             </Router>
             <Footer />
