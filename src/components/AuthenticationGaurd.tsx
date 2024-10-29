@@ -10,7 +10,7 @@ interface AuthenticationGaurdProps {
 
 const AuthenticationGaurd = ({component}: AuthenticationGaurdProps) => {
     const Component = withAuthenticationRequired(component, {
-        returnTo: '/profile',
+        returnTo: '/',
         onRedirecting: () => (
             <div>
                 Loading...
