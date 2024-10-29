@@ -2,9 +2,9 @@ import React, { useMemo } from 'react'
 import { useProductData } from '../hooks/useProductData';
 import { QueryKey, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { Card, ListGroup } from 'react-bootstrap';
 import { addToCart, calculateTotals } from '../features/cartListSlice'
-import NavBarHome from './NavBarHome';
+import NavBar from './NavBar';
+import { Card, CardBody, CardFooter } from '@material-tailwind/react';
 
 interface Product {
   id: number,
@@ -20,7 +20,7 @@ interface Product {
 }
 
 
-const Products: React.FC= () => {
+const Products: React.FC = () => {
   const { products: initialProducts } = useProductData();
   const queryClient = useQueryClient();
 
@@ -42,34 +42,24 @@ const Products: React.FC= () => {
 
     <>
       {/* <NavBar /> */}
-      <NavBarHome />
-      <div className="container bg-black text-white" >
-        <div className="row">
-          {products.map((product) => (
-            <div className="col" key={product.id}>
-              <Card style={{width: '19rem', height: 'auto'}}>
-                <Card.Img variant="top" src={product.image} />
-                <Card.Body>
-                  <Card.Title>{product.title}</Card.Title>
-                  <Card.Text>
-                    {product.description}
-                  </Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroup.Item>Category: {product.category}</ListGroup.Item>
-                  <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-                  <ListGroup.Item>Rating: {product.rating.rate}</ListGroup.Item>
-                </ListGroup>
-                <Card.Body>
-                  <button className="btn btn-primary" onClick={() => handleAddToCart(product)}>Add to Cart</button>
-                </Card.Body>
-              </Card>
-            </div>
-          ))}
-
-        </div>
-
-
+      <NavBar />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 text-black" >
+        {products.map((product, index) => (
+          <div key={index}>
+            <Card placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+              <CardBody className='w-[300px] h-[420px]' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                <img src={product.image} alt={product.title} className="w-[250px] h-64" />
+                <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
+              </CardBody>
+              <CardFooter className='flex ' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                <button className="bg-blue-500 mt-auto text-white px-4 py-2 rounded-md" onClick={() => handleAddToCart(product)}>
+                  Add to Cart
+                </button>
+                <p className="text-gray-600 mt-1 ml-auto">${product.price}</p>
+              </CardFooter>
+            </Card>
+          </div>
+        ))}
       </div>
     </>
 

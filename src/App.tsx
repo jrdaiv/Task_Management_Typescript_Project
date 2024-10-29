@@ -63,7 +63,7 @@ export const App: React.FC = () => {
                 <Route path="/callback" element={<Callback />} />
               </Routes>
             </Router>
-            <Footer />
+            {/* <Footer /> */}
           </UserContext.Provider>
         </Provider>
       </QueryClientProvider>

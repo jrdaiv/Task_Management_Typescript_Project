@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
-    }, []);
+    }, [setUser]);
 
     useEffect(() => {
         if (isAuthenticated && auth0User) {
@@ -43,10 +43,19 @@ const NavBar: React.FC = () => {
                 cart: [],
                 isLoggedIn: true,
             };
-            setUser(userData);
+
+            // Avoid redundant state updates by checking if the user data is already set
+            setUser((prevUser) => {
+                const isSameUser =
+                    prevUser?.id === userData.id &&
+                    prevUser?.username === userData.username;
+                return isSameUser ? prevUser : userData;
+            });
+
             localStorage.setItem('user', JSON.stringify(userData));
         } else {
-            setUser(null);
+            // Only reset user if it's not already null
+            setUser((prevUser) => (prevUser ? null : prevUser));
         }
     }, [isAuthenticated, auth0User, setUser]);
 
@@ -68,12 +77,11 @@ const NavBar: React.FC = () => {
                         <Typography as="a" href="/products" className="text-gray-800 hover:text-gray-600" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                             Products
                         </Typography>
-                        <Button
-                            variant="text"
-                            size="sm"
+                        <Typography as="a" href="/cart"
+                            className="text-gray-800 hover:text-gray-600"
                             color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                        >
                             Cart
-                        </Button>
+                        </Typography>
 
                         {isAuthenticated ? (
                             <div className="flex items-center space-x-4">

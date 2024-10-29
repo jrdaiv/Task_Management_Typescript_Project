@@ -9,33 +9,32 @@ import { Spinner } from 'react-bootstrap';
 
 
 export const Home: React.FC = () => {
-  // const {user} = useContext(UserContext);
   const { isAuthenticated, isLoading, user } = useAuth0();
 
   const message: string = 'Please help yourself to the products page'
   const message2: string = 'Please log in to view catalog '
 
-    if(isLoading) {
-        return <Spinner animation="border" variant="primary" />
-    }
+  if (isLoading) {
+    return <Spinner animation="border" variant="primary" />
+  }
 
-  
+
 
   return (
 
     <>
-        <NavBar />
+      <NavBar />
       <div className='home-container '>
-          { isAuthenticated ? (
-            <div>
-              <ProfilePage />
-              <h1>Hi, {user?.name}</h1>
-              <h3>{message}</h3>
-            </div>
-          ) : (
-            <h1>{message2}</h1>
-          
-          )}
+        {isAuthenticated ? (
+          <div>
+            <ProfilePage />
+            <h1 className='ml-10 mt-3'>Hi, {user?.name}</h1>
+            <h3 className='mx-auto flex justify-center'>{message}</h3>
+          </div>
+        ) : (
+          <h1>{message2}</h1>
+
+        )}
 
       </div>
     </>

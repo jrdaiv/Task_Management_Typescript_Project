@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, clearCart, calculateTotals } from '../features/cartListSlice';
-import '../App.css'
-import NavBarHome from './NavBarHome';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 
 interface CartItem {
   id: number,
@@ -35,7 +34,7 @@ interface State {
 
   return (
     <>
-    <NavBarHome />
+    <NavBar />
     <div className='cart-container'>
       <h2 className='mt-5 mb-5 text-white'>Shopping Cart</h2>
       {cartItems.map(item => (

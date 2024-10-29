@@ -15,7 +15,7 @@ export const Profile = () => {
     <div >
         {isAuthenticated && ( 
             <div>
-                <img className='w-[100px] ml-24' src={user?.picture} alt={user?.name} />
+                <img className='w-[100px] rounded-2xl ml-[30px] mt-[30px]' src={user?.picture} alt={user?.name} />
             </div>
         )}
         

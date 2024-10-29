@@ -1,7 +1,7 @@
 import React, { useState, useContext, FormEvent, useEffect } from "react";
 import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 import axios from "axios";
-import NavBarHome from "./NavBarHome";
+import NavBar from "./NavBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import UserContext, { User } from "../context/UserContext";
 import { fetchAllUsers, fetchUser } from "../hooks/UserData";
@@ -92,7 +92,7 @@ const Settings: React.FC = () => {
 
   return (
     <div>
-      <NavBarHome />
+      <NavBar />
       <h2 className="mt-5 text-white">Settings</h2>
       <h5>Update Profile</h5>
       <Form onSubmit={handleUserUpdate}>
