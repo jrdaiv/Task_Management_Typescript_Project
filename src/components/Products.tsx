@@ -2,11 +2,8 @@ import React, { useMemo } from 'react'
 import { useProductData } from '../hooks/useProductData';
 import { QueryKey, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { Card, Container, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 import { addToCart, calculateTotals } from '../features/cartListSlice'
-// import '../App.css'
-import '../styles/Components.css'
-import NavBar from './NavBar';
 import NavBarHome from './NavBarHome';
 
 interface Product {
@@ -46,11 +43,11 @@ const Products: React.FC= () => {
     <>
       {/* <NavBar /> */}
       <NavBarHome />
-      <div className="container-sm container-md" >
+      <div className="container bg-black text-white" >
         <div className="row">
           {products.map((product) => (
             <div className="col" key={product.id}>
-              <Card style={{width: '19rem'}}>
+              <Card style={{width: '19rem', height: 'auto'}}>
                 <Card.Img variant="top" src={product.image} />
                 <Card.Body>
                   <Card.Title>{product.title}</Card.Title>

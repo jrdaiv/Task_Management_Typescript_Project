@@ -1,45 +1,33 @@
-import { useEffect } from 'react';
-import React, { useContext, useState, FormEvent } from 'react';
-import { Navbar, Nav, Button, Offcanvas, Form, NavDropdown, Badge } from 'react-bootstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
-import UserContext, { User } from '../context/UserContext';
+import React, { useContext, useState, useEffect } from 'react';
+import {
+    Navbar,
+    Typography,
+    Button,
+    IconButton,
+    Collapse,
+    Drawer,
+} from "@material-tailwind/react";
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
-import '../App.css'
-
-// interface User {
-//     id: string,
-//     name: string,
-//     email: string,
-//     password: string,
-//     userName: string,
-//     // token: string,
-//     cart?: any[],
-//     isLoggedIn: boolean,
-// }
+import UserContext, { User } from '../context/UserContext';
 
 const NavBar: React.FC = () => {
     const { user, setUser } = useContext(UserContext);
     const { user: auth0User, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-    // const navigate = useNavigate();
 
-    const [showLogin, setShowLogin] = useState<boolean>(false);
-    const [showRegister, setShowRegister] = useState<boolean>(false);
+    const [openNav, setOpenNav] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
-
-
-    const handleCloseLogin = () => setShowLogin(false);
-    const handleShowLogin = () => setShowLogin(true);
-
-    const handleCloseRegister = () => setShowRegister(false);
-    const handleShowRegister = () => setShowRegister(true);
+    const handleLogout = () => {
+        logout({ logoutParams: { returnTo: window.location.origin } });
+    };
 
     useEffect(() => {
-        const storedUser = sessionStorage.getItem('user')
+        const storedUser = sessionStorage.getItem('user');
         if (storedUser) {
-            setUser(JSON.parse(storedUser))
+            setUser(JSON.parse(storedUser));
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (isAuthenticated && auth0User) {
@@ -57,87 +45,125 @@ const NavBar: React.FC = () => {
             };
             setUser(userData);
             localStorage.setItem('user', JSON.stringify(userData));
-            // navigate('/')
         } else {
             setUser(null);
         }
     }, [isAuthenticated, auth0User, setUser]);
 
-
-    
-
-
-
-
     return (
+        <>
+            <Navbar className="mx-auto max-w-screen-xl px-4 py-2 bg-white shadow-md" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                <div className="container mx-auto flex items-center justify-between">
+                    {/* E-Commerce Title */}
+                    <Typography
+                        as="a"
+                        href="/"
+                        variant="h5"
+                        className="cursor-pointer text-gray-800" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
+                        E-Commerce
+                    </Typography>
 
+                    {/* Desktop Links */}
+                    <div className="hidden lg:flex items-center space-x-6">
+                        <Typography as="a" href="/products" className="text-gray-800 hover:text-gray-600" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                            Products
+                        </Typography>
+                        <Button
+                            variant="text"
+                            size="sm"
+                            color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                        >
+                            Cart
+                        </Button>
 
-        <div>
-            <Navbar className='navbar-home' bg='transparent' expand="sm">
-                <Navbar.Brand href="/">E-Commerce</Navbar.Brand>
-                <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                <Navbar.Collapse id='basic-navbar-nav'>
-                    <Nav className="ms-auto">
+                        {isAuthenticated ? (
+                            <div className="flex items-center space-x-4">
+
+                                <Button variant="gradient" size="sm" onClick={handleLogout} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    Logout
+                                </Button>
+                            </div>
+                        ) : (
+                            <>
+                                <Button variant="text" size="sm" color="gray" onClick={() => setShowLogin(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    Login
+                                </Button>
+                                <Button variant="text" size="sm" color="gray" onClick={() => setShowRegister(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    Register
+                                </Button>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Mobile Menu Icon */}
+                    <IconButton
+                        variant="text"
+                        className="ml-auto lg:hidden"
+                        onClick={() => setOpenNav(!openNav)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
+                        {/* Simple text for menu icon */}
+                        ☰
+                    </IconButton>
+                </div>
+
+                {/* Mobile Links */}
+                <Collapse open={openNav}>
+                    <div className="flex flex-col space-y-2 lg:hidden mt-4">
+                        <a href="/products" className="text-gray-800 hover:text-gray-600">
+                            Products
+                        </a>
+                        <a href="/cart" className="text-gray-800 hover:text-gray-600">
+                            Cart
+                        </a>
+
                         {isAuthenticated ? (
                             <>
-                                <Nav.Link href="/products">Products</Nav.Link>
-                                <NavDropdown title="Account" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-                                        Logout
-                                    </NavDropdown.Item>
-                                </NavDropdown>
-                                <Nav.Link href="/cart">
-                                    Cart 
-                                </Nav.Link>
+
+                                <Button variant="gradient" size="sm" onClick={handleLogout} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    Logout
+                                </Button>
                             </>
                         ) : (
                             <>
-                                <Button className='text-white' variant="text" onClick={handleShowLogin}>Login</Button>
-                                <Button className='text-white' variant="text" onClick={handleShowRegister}>Register</Button>
+                                <Button variant="text" size="sm" color="gray" onClick={() => setShowLogin(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    Login
+                                </Button>
+                                <Button variant="text" size="sm" color="gray" onClick={() => setShowRegister(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    Register
+                                </Button>
                             </>
                         )}
-                    </Nav>
-
-                </Navbar.Collapse>
+                    </div>
+                </Collapse>
             </Navbar>
 
-            <Offcanvas className='sm' show={showLogin} onHide={handleCloseLogin}>
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Login</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                    <Form>
-                        <Button className='login-btn' variant="primary" onClick={() => loginWithRedirect()} type="submit">
-                            Login
-                        </Button>
-                    </Form>
-                </Offcanvas.Body>
+            {/* Login Drawer */}
+            <Drawer open={showLogin} onClose={() => setShowLogin(false)} placement="right" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                <div className="p-4 w-80">
+                    <h2 className="text-lg font-semibold mb-4">Login</h2>
+                    <Button
+                        variant="gradient"
+                        size="lg"
+                        onClick={() => loginWithRedirect()}
+                        fullWidth placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
+                        Login with Auth0
+                    </Button>
+                </div>
+            </Drawer>
 
-            </Offcanvas>
+            {/* Register Drawer */}
+            <Drawer open={showRegister} onClose={() => setShowRegister(false)} placement="right" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                <div className="p-4 w-80">
+                    <h2 className="text-lg font-semibold mb-4">Register</h2>
+                    <Button
+                        variant="gradient"
+                        size="lg"
+                        onClick={() => loginWithRedirect()}
+                        fullWidth placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
+                        Register with Auth0
+                    </Button>
+                </div>
+            </Drawer>
+        </>
+    );
+};
 
-            <Offcanvas show={showRegister} onHide={handleCloseRegister}>
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Register</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                    <Form>
-                        <Button className='register-btn' variant="primary" type="submit" onClick={() => loginWithRedirect()}>
-                            Register
-                        </Button>
-
-                    </Form>
-                </Offcanvas.Body>
-
-            </Offcanvas>
-
-
-        </div>
-
-
-    )
-
-
-}
-
-export default NavBar
+export default NavBar;

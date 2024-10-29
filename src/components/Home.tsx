@@ -25,7 +25,7 @@ export const Home: React.FC = () => {
 
     <>
         <NavBar />
-      <div className='home-container'>
+      <div className='home-container '>
           { isAuthenticated ? (
             <div>
               <ProfilePage />
@@ -36,11 +36,7 @@ export const Home: React.FC = () => {
             <h1>{message2}</h1>
           
           )}
-        
-        {/* <div className="home-container">
-          
-            
-        </div> */}
+
       </div>
     </>
 

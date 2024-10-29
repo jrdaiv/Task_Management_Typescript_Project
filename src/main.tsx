@@ -9,7 +9,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     domain="dev-nfy7do24ocfbkmso.us.auth0.com"
     clientId="yRrTiuuXtaPwQ5iqluHLoccmmtjVlGIB"
     authorizationParams={{
-      redirect_uri: window.location.origin + "/callback"
+      redirect_uri: window.location.origin
     }}
   >
     <App />
