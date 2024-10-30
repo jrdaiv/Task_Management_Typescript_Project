@@ -12,7 +12,7 @@ export const Home: React.FC = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
 
   const message: string = 'Please help yourself to the products page'
-  const message2: string = 'Please log in to view catalog '
+  const message2: string = 'Please log in to view products '
 
   if (isLoading) {
     return <Spinner animation="border" variant="primary" />
@@ -28,11 +28,11 @@ export const Home: React.FC = () => {
         {isAuthenticated ? (
           <div>
             <ProfilePage />
-            <h1 className='ml-10 mt-3'>Hi, {user?.name}</h1>
-            <h3 className='mx-auto flex justify-center'>{message}</h3>
+            <h1 className='font-bold text-3xl flex justify-center mt-[300px]'>Hi, {user?.name}</h1>
+            <h3 className='font-bold text-3xl flex justify-center'>{message}</h3>
           </div>
         ) : (
-          <h1>{message2}</h1>
+          <h1 className='font-bold text-3xl flex justify-center mt-[300px]'>{message2}</h1>
 
         )}
 
