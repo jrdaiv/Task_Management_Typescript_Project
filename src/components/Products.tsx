@@ -46,13 +46,13 @@ const Products: React.FC = () => {
       <div className="flex flex-wrap gap-4 p-10 ml-16 text-black" >
         {products.map((product, index) => (
           <div key={index}>
-            <Card className='w-[300px]' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <Card className='w-[300px] shadow-2xl' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               <CardBody className='w-[300px] h-[420px]' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                 <img src={product.image} alt={product.title} className="w-[250px] h-64" />
                 <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
               </CardBody>
               <CardFooter className='flex ' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                <button className="bg-blue-500 mt-auto text-white px-4 py-2 rounded-md" onClick={() => handleAddToCart(product)}>
+                <button className="bg-black mt-auto text-white px-4 py-2 rounded-2xl" onClick={() => handleAddToCart(product)}>
                   Add to Cart
                 </button>
                 <p className="text-gray-600 mt-1 ml-auto">${product.price}</p>

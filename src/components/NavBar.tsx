@@ -44,7 +44,6 @@ const NavBar: React.FC = () => {
                 isLoggedIn: true,
             };
 
-            // Avoid redundant state updates by checking if the user data is already set
             setUser((prevUser) => {
                 const isSameUser =
                     prevUser?.id === userData.id &&
@@ -61,7 +60,7 @@ const NavBar: React.FC = () => {
 
     return (
         <>
-            <Navbar className="mx-auto max-w-screen-xl px-4 py-2 bg-white shadow-md" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <Navbar className="mx-auto max-w-screen-xl px-4 py-2 bg-white shadow-xl" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                 <div className="container mx-auto flex items-center justify-between">
                     {/* E-Commerce Title */}
                     <Typography
@@ -74,11 +73,11 @@ const NavBar: React.FC = () => {
 
                     {/* Desktop Links */}
                     <div className="hidden lg:flex items-center space-x-6">
-                        <Typography as="a" href="/products" className="text-gray-800 hover:text-gray-600" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                        <Typography as="a" href="/products" className="text-gray-800 font-bold hover:text-gray-600" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                             Products
                         </Typography>
                         <Typography as="a" href="/cart"
-                            className="text-gray-800 hover:text-gray-600"
+                            className="text-gray-800 hover:text-gray-600 font-bold"
                             color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                        >
                             Cart
                         </Typography>
