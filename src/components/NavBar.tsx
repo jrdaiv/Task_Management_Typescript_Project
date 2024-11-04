@@ -60,7 +60,7 @@ const NavBar: React.FC = () => {
 
     return (
         <>
-            <Navbar className="mx-auto max-w-screen-xl px-4 py-2 bg-white shadow-xl" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+            <Navbar className="mx-auto max-w-screen-2xl px-4 py-2 bg-white shadow-xl" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                 <div className="container mx-auto flex items-center justify-between">
                     {/* E-Commerce Title */}
                     <Typography
@@ -72,29 +72,31 @@ const NavBar: React.FC = () => {
                     </Typography>
 
                     {/* Desktop Links */}
-                    <div className="hidden lg:flex items-center space-x-6">
-                        <Typography as="a" href="/products" className="text-gray-800 font-bold hover:text-gray-600" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                            Products
-                        </Typography>
-                        <Typography as="a" href="/cart"
-                            className="text-gray-800 hover:text-gray-600 font-bold"
-                            color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                        >
-                            Cart
-                        </Typography>
+                    <div className="hidden lg:flex items-center space-x-3">
+                        <div className='flex space-x-4'>
+                            <Typography as="a" href="/products" className="text-gray-800 font-medium hover:text-gray-600" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                Products
+                            </Typography>
+                            <Typography as="a" href="/cart"
+                                className="text-gray-800 hover:text-gray-600 font-medium"
+                                color="gray" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                        >
+                                Cart
+                            </Typography>
+                        </div>
 
                         {isAuthenticated ? (
                             <div className="flex items-center space-x-4">
 
-                                <Button variant="gradient" size="sm" onClick={handleLogout} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                <Button variant="text" size="sm" color='red' onClick={handleLogout} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     Logout
                                 </Button>
                             </div>
                         ) : (
                             <>
-                                <Button variant="text" size="sm" color="gray" onClick={() => setShowLogin(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                <Button variant="text" size="sm" color="green" onClick={() => setShowLogin(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     Login
                                 </Button>
-                                <Button variant="text" size="sm" color="gray" onClick={() => setShowRegister(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                <Button variant="text" size="sm" color="blue" onClick={() => setShowRegister(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     Register
                                 </Button>
                             </>
@@ -124,16 +126,16 @@ const NavBar: React.FC = () => {
                         {isAuthenticated ? (
                             <>
 
-                                <Button variant="gradient" size="sm" onClick={handleLogout} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                <Button variant="gradient" size="sm" color='red' onClick={handleLogout} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     Logout
                                 </Button>
                             </>
                         ) : (
                             <>
-                                <Button variant="text" size="sm" color="gray" onClick={() => setShowLogin(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                <Button variant="text" size="sm" color="green" onClick={() => setShowLogin(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     Login
                                 </Button>
-                                <Button variant="text" size="sm" color="gray" onClick={() => setShowRegister(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                <Button variant="text" size="sm" color="blue" onClick={() => setShowRegister(true)} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     Register
                                 </Button>
                             </>
@@ -144,11 +146,12 @@ const NavBar: React.FC = () => {
 
             {/* Login Drawer */}
             <Drawer open={showLogin} onClose={() => setShowLogin(false)} placement="right" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                <div className="p-4 w-80">
-                    <h2 className="text-lg font-semibold mb-4">Login</h2>
+                <div className="p-4 w-full">
+                    <h2 className="text-lg text-center underline font-semibold mb-4">Login</h2>
                     <Button
                         variant="gradient"
-                        size="lg"
+                        size="md"
+                        color='green'
                         onClick={() => loginWithRedirect()}
                         fullWidth placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                         Login with Auth0
@@ -158,11 +161,12 @@ const NavBar: React.FC = () => {
 
             {/* Register Drawer */}
             <Drawer open={showRegister} onClose={() => setShowRegister(false)} placement="right" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                <div className="p-4 w-80">
-                    <h2 className="text-lg font-semibold mb-4">Register</h2>
+                <div className="p-4 w-full">
+                    <h2 className="text-lg font-semibold text-center underline mb-4">Register</h2>
                     <Button
                         variant="gradient"
-                        size="lg"
+                        size="md"
+                        color='blue'
                         onClick={() => loginWithRedirect()}
                         fullWidth placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                         Register with Auth0

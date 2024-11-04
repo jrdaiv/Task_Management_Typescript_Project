@@ -44,18 +44,18 @@ const ShoppingCart: React.FC = () => {
           <>
             <div className='flex flex-wrap gap-6 mx-auto items-center justify-center'>
               {cartItems.map(item => (
-                <Card className='w-[400px] h-[250px] shadow-2xl' key={item.id} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                <Card className='w-[400px] h-[260px] shadow-2xl' key={item.id} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                   <CardBody className='flex flex-wrap items-center gap-4' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                     <img src={item.image} alt={item.title} className='w-[100px] h-[100px]' />
                     <div className='flex-1'>
-                      <h3 className='font-bold text-black flex flex-wrap'>{item.title}</h3>
-                      <p>Price: ${item.price.toFixed(2)}</p>
-                      <p>Quantity: {item.quantity}</p>
+                      <h3 className='font-semibold text-black flex flex-wrap'>{item.title}</h3>
+                      <p className='text-sm'>Price: ${item.price.toFixed(2)}</p>
+                      <p className='text-sm'>Quantity: {item.quantity}</p>
                     </div>
                   </CardBody>
                   <CardFooter className='mt-auto' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                     <button
-                      className='bg-black text-white rounded-2xl py-1 w-full'
+                      className='bg-black text-white font-semibold rounded-2xl py-1 w-full'
                       onClick={() => dispatch(removeFromCart(item))}
                     >
                       Remove
